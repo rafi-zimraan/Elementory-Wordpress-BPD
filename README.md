@@ -1,143 +1,126 @@
-ZAKAT & INFAQ CALCULATOR
 
-🕌 Aplikasi Perhitungan Infaq, Zakat Mal, dan Zakat Fitrah
+# 🕌 Zakat & Infaq Calculator
 
+## 👋 Pengantar
 ![Zakat & Donasi Banner](https://github.com/rafi-zimraan/Elementory-Wordpress-BPD/blob/main/assets/backgroundApp.png)
 
+Aplikasi kalkulator berbasis **HTML, CSS, dan JavaScript murni** yang dirancang untuk membantu pengguna menghitung kewajiban **Zakat Mal**, **Zakat Fitrah**, serta **Infaq** secara cepat, akurat, dan **sepenuhnya *offline***.
 
-Aplikasi berbasis HTML + CSS + JavaScript yang membantu pengguna menghitung kewajiban zakat serta infaq secara cepat dan akurat.
+Aplikasi ini ideal untuk penggunaan pribadi, komunitas, atau institusi keagamaan seperti masjid, karena tidak memerlukan *backend* atau koneksi internet.
 
-Aplikasi ini cocok digunakan untuk personal, komunitas, ataupun lembaga seperti masjid, karena seluruh fitur berjalan secara offline tanpa memerlukan backend.
+---
 
-🧰 Tech Stack
+## 🚀 Fitur Utama
+*️⃣ **Hitung Cepat & Akurat**
 
-HTML5 (struktur halaman)
+* ✨ **Perhitungan Infaq**
+    * Cukup input nominal. Hasil langsung ditampilkan.
+* ✨ **Perhitungan Zakat Mal (2.5%)**
+    * Menghitung zakat dari harta tunai, tabungan, emas/setara emas.
+    * **Fitur Spesial**: Input nisab dalam Rupiah dan indikator otomatis apakah harta sudah mencapai nisab.
+* ✨ **Perhitungan Zakat Fitrah**
+    * Dukungan untuk dua metode: **Beras (kg)** dan **Uang (Rupiah)**.
+    * Fleksibel mengikuti standar takaran dan harga beras/nominal per jiwa daerah setempat.
 
-CSS / TailwindCSS (opsional untuk UI)
+> 💡 **Offline-Ready**: Seluruh logika perhitungan murni menggunakan JavaScript dan berjalan secara lokal di *browser* Anda.
 
-JavaScript murni (logika perhitungan)
+---
 
-No Framework, No Backend — berjalan offline dan ringan
+## 🛠 Tech Stack
+Aplikasi ini dibangun menggunakan teknologi dasar *web* untuk memastikan kinerja ringan dan *portabilitas* maksimal:
 
-🚀 Getting Started
-1️⃣ Buka Aplikasi
+* **HTML5** (Struktur halaman)
+* **CSS / TailwindCSS** *(Opsional: Untuk kustomisasi UI)*
+* **JavaScript murni** (Logika perhitungan)
 
-Karena ini aplikasi HTML murni, tidak ada instalasi rumit.
+*No Framework, No Backend — Ringan & Berjalan Offline.*
 
-Cukup buka:
+---
 
-index.html
+## 📦 Getting Started
 
+Karena aplikasi ini murni berbasis HTML, tidak ada proses instalasi yang rumit. Anda hanya perlu menjalankan *file* utama di *browser* Anda.
 
-Atau melalui command:
+### 1️⃣ Buka Aplikasi
 
-Windows
+Anda dapat langsung membuka *file* `index.html` di *browser* pilihan Anda.
 
-start index.html
+* **Jalur Langsung:**
+    ```
+    index.html
+    ```
+* **Melalui Terminal (Opsional):**
 
+| Sistem Operasi | Perintah |
+| :--- | :--- |
+| **Windows** | `start index.html` |
+| **macOS/Linux** | `open index.html` |
 
-macOS
+---
 
-open index.html
+## 📂 Struktur Project
 
-📦 Fitur Utama
-✨ 1. Perhitungan Infaq
-
-Pengguna cukup memasukkan nominal infaq.
-Hasil langsung muncul tanpa proses tambahan.
-
-✨ 2. Perhitungan Zakat Mal
-
-Menghitung zakat sebesar 2.5% (1/40) dari total harta.
-
-Komponen perhitungan yang didukung:
-
-Harta tunai
-
-Tabungan
-
-Emas / setara emas
-
-Hutang yang jatuh tempo
-
-Fitur tambahan:
-
-Input nisab dalam rupiah
-
-Indikator apakah harta sudah mencapai nisab
-
-Perhitungan zakat otomatis
-
-✨ 3. Perhitungan Zakat Fitrah
-
-Dapat dihitung dengan dua metode: beras dan uang.
-
-📌 Metode Beras
-total kg = jumlah jiwa × 2.5 kg
-total rupiah = total kg × harga beras per kg
-
-📌 Metode Uang
-total rupiah = jumlah jiwa × nominal per jiwa
+/ (root) ├─ index.html # Halaman utama aplikasi ├─ css/ │  └─ styles.css # Gaya CSS (termasuk Tailwind jika digunakan) ├─ js/ │  └─ kalkulator.js # Logika JavaScript untuk perhitungan └─ assets/    └─ banner-zakat.jpg # Aset gambar (banner/icon)
 
 
-Fleksibel mengikuti standar daerah setempat.
+---
 
-📂 Struktur Project
-/ (root)
-├─ index.html
-├─ css/
-│  └─ styles.css
-├─ js/
-│  └─ kalkulator.js
-└─ assets/
-   └─ banner-zakat.jpg
+## 📝 Contoh Logika Perhitungan (JavaScript)
 
-🧮 Contoh Kode Perhitungan
-Zakat Mal
+Kode berikut menunjukkan inti logika perhitungan yang digunakan dalam `js/kalkulator.js`:
+
+```javascript
+// Zakat Mal
 function hitungZakatMal(harta, nisab) {
   const wajib = harta >= nisab;
   const zakat = wajib ? harta * 0.025 : 0;
   return { wajib, zakat: Math.round(zakat) };
 }
 
-Zakat Fitrah
+// Zakat Fitrah
 function hitungZakatFitrah(jiwa, metode, takaran, harga) {
   if (metode === "beras") {
+    // takaran default 2.5 kg
     const totalKg = jiwa * takaran;
     const totalRupiah = totalKg * harga;
     return { totalKg, totalRupiah };
   }
+  // Metode uang
   return { totalRupiah: jiwa * harga };
 }
 
-Infaq
+// Infaq
 function hitungInfaq(nominal) {
   return Number(nominal);
 }
+🛠️ Kustomisasi Lanjut
+Anda dapat memodifikasi proyek ini sesuai kebutuhan:
 
-🛠️ Cara Kustomisasi
+Nilai Nisab: Ubah nilai nisab dan harga emas di js/kalkulator.js agar sesuai dengan ketentuan daerah terbaru.
 
-Ubah nilai nisab sesuai ketentuan daerah
+Takaran Fitrah: Sesuaikan takaran beras fitrah (default 2.5 kg).
 
-Ubah takaran fitrah (default 2.5 kg)
+Formatting: Terapkan format mata uang Rupiah (Rp.) pada hasil perhitungan.
 
-Pasang format angka rupiah
+Desain UI: Tingkatkan antarmuka menggunakan framework CSS seperti TailwindCSS.
 
-Tambah UI modern dengan Tailwind
-
-Bisa dibuat PWA untuk digunakan offline
+PWA: Kembangkan menjadi Progressive Web App (PWA) agar dapat di-install dan diakses lebih mudah secara offline.
 
 🤝 Kontribusi
+Kami menyambut baik segala bentuk kontribusi untuk menyempurnakan kalkulator ini!
 
-Kontribusi sangat terbuka:
+Fork repositori ini.
 
-Fork repo
+Buat branch fitur baru (git checkout -b feature/nama-fitur).
 
-Buat branch
+Lakukan commit perubahan Anda.
 
-Ajukan pull request
+Push ke branch Anda (git push origin feature/nama-fitur).
+
+Ajukan Pull Request (PR).
 
 📜 Lisensi
+Proyek ini dilindungi di bawah MIT License.
 
 MIT License
 
